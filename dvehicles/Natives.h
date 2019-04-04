@@ -1774,7 +1774,7 @@ void UnStreamDynamicVehicle(int dynamicid, int vehicleid)
 	GetVehicleHealth(vehicleid, &health);
 	VehiclesData[dynamicid].Health = health;
 	/******** Attached Objects *******/
-	for (map<int, AttachedObject>::iterator it = VehiclesData[dynamicid].AttachObject.begin(); it != VehiclesData[dynamicid].AttachObject.end(); ++it)
+	for (map<int, AttachedObject>::iterator it = VehiclesData[dynamicid].AttachObject.begin(); it != VehiclesData[dynamicid].AttachObject.end(); it++)
 	{
 		int objectid = it->first;
 		if (!IsValidDynamicObject(objectid) || Streamer_GetIntData(0, objectid, 3) != vehicleid) // object is destroyed or something, not the vehicle we attached to before!
@@ -1789,7 +1789,7 @@ void UnStreamDynamicVehicle(int dynamicid, int vehicleid)
 		}
 	}
 
-	for (map<int, AttachedLabel>::iterator it = VehiclesData[dynamicid].AttachLabel.begin(); it != VehiclesData[dynamicid].AttachLabel.end(); it)
+	for (map<int, AttachedLabel>::iterator it = VehiclesData[dynamicid].AttachLabel.begin(); it != VehiclesData[dynamicid].AttachLabel.end(); it++)
 	{
 		int labelid = it->first;
 		if (!IsValidDynamic3DTextLabel(labelid) || Streamer_GetIntData(5, labelid, 3) != vehicleid) // object is destroyed or something, not the vehicle we attached to before!
@@ -1939,12 +1939,12 @@ void StreamVehicle(int dynamicid, VehicleData &vehicle)
 	/****************Health********************/
 	SetVehicleHealth(vid, vehicle.Health);
 	/*************Player Params****************/
-	for (map<int, VehiclePlayerParams>::iterator it = vehicle.PlayerParams.begin(); it != vehicle.PlayerParams.end(); ++it)
+	for (map<int, VehiclePlayerParams>::iterator it = vehicle.PlayerParams.begin(); it != vehicle.PlayerParams.end(); it++)
 	{
 		int playerid = it->first, objective = it->second.objective, doorslocked = it->second.doorslocked;
 		SetVehicleParamsForPlayer(vid, playerid, objective, doorslocked);
 	}
-	for (map<int, AttachedObject>::iterator it = vehicle.AttachObject.begin(); it != vehicle.AttachObject.end(); ++it)
+	for (map<int, AttachedObject>::iterator it = vehicle.AttachObject.begin(); it != vehicle.AttachObject.end(); it++)
 	{
 		int objectid = it->first;
 		if (!IsValidDynamicObject(objectid) || Streamer_GetIntData(0, objectid, 48) != 6621) // object is destroied or something, not the world we set before!
@@ -1963,7 +1963,7 @@ void StreamVehicle(int dynamicid, VehicleData &vehicle)
 		AttachDynamicObjectToVehicle(objectid, vid, offsetx, offsety, offsetz, rx, ry, rz);
 	}
 
-	for (map<int, AttachedLabel>::iterator it = vehicle.AttachLabel.begin(); it != vehicle.AttachLabel.end(); it)
+	for (map<int, AttachedLabel>::iterator it = vehicle.AttachLabel.begin(); it != vehicle.AttachLabel.end(); it++)
 	{
 		int labelid = it->first;
 		if (!IsValidDynamic3DTextLabel(labelid) || Streamer_GetIntData(5, labelid, 48) != 6621) // object is destroied or something, not the world we set before!
